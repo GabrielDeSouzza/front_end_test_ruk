@@ -1,18 +1,11 @@
-import { useState } from 'react';
-import { Button, Text, View } from 'react-native';
+import { View } from 'react-native';
 import '../global.css';
+import { LoginForm } from '../components/forms/LoginForm/LoginForm';
 
 export default function Index() {
-  const [x, setX] = useState(0);
-  const count = () => {
-    setX(x + 1);
-  };
   return (
-    <View className="bg-slate-600">
-      <Text onPress={count} className="float-end bg-red-700">
-        Hello Word {x}
-      </Text>
-      <Button title="count" onPress={count}></Button>
+    <View className=" w-full justify-center items-center h-4/5">
+      <LoginForm />
     </View>
   );
 }
