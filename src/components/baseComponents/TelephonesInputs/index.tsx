@@ -16,9 +16,9 @@ export default function TelephonesInputs({
       <View className=" flex-row flex-wrap gap-3 my">
         {fields.map((item, index) => {
           return (
-            <View key={item.id} className=" min-w-80 max-w-96">
-              <View className="flex-col">
-                <View className="max-w-32">
+            <View key={item.id} className="max-w-56">
+              <View className="flex-row">
+                <View className="w-24">
                   <InputForm
                     control={control}
                     name={`${name}.${index}.areaCode`}
@@ -26,7 +26,7 @@ export default function TelephonesInputs({
                     tittle="DDD"
                   />
                 </View>
-                <View className="max-w-56">
+                <View className="w-36">
                   <InputForm
                     control={control}
                     name={`${name}.${index}.phoneNumber`}

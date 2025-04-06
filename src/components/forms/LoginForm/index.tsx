@@ -65,13 +65,16 @@ export function LoginForm() {
           </View>
         </View>
       </FormProvider>
-      {statusCode! >= 404 && (
+      {statusCode === 401 && <ToastMessage isError message="SENHA INCORRETA" />}
+      {statusCode === 404 && (
         <ToastMessage isError message="CADASTRO NÃO LOCALIZADO" />
       )}
-
-      {statusCode! >= 400 && statusCode! !== 404 && (
-        <ToastMessage isError message="ERRO AO REALIZAR LOGIN" />
-      )}
+      {statusCode &&
+        statusCode >= 400 &&
+        statusCode !== 401 &&
+        statusCode !== 404 && (
+          <ToastMessage isError message="ERRO AO REALIZAR LOGIN" />
+        )}
 
       <LoadingModal visible={isLoading} message="Logando"></LoadingModal>
     </View>
