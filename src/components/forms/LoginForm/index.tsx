@@ -32,7 +32,6 @@ export function LoginForm() {
       router.navigate('/home');
     }
   }, [statusCode]);
-  console.log(statusCode);
   return (
     <View className="w-full  justify-center items-center h-4/5">
       <FormProvider {...methods}>
@@ -42,6 +41,7 @@ export function LoginForm() {
             name="email"
             placeholder="Digite seu Email"
             tittle="Email"
+            autoCapitalize="none"
           />
           <InputForm
             control={methods.control}
@@ -49,6 +49,7 @@ export function LoginForm() {
             placeholder="Digite sua senha"
             tittle="Senha"
             secureTextEntry
+            autoCapitalize="none"
           />
           <View className="flex-row gap-4">
             <Button

@@ -35,7 +35,6 @@ export function SignUpForm() {
       router.navigate('/Index');
     }
   });
-  console.log(statusCode);
   return (
     <ScrollView
       className="flex-1 bg-white"
@@ -58,12 +57,14 @@ export function SignUpForm() {
             name="email"
             placeholder="Digite seu Email"
             tittle="Email"
+            autoCapitalize="none"
           />
           <InputForm
             control={methods.control}
             name="password"
             placeholder="Crie uma Senha"
             tittle="Senha"
+            autoCapitalize="none"
           />
           <TelephonesInputs control={methods.control} name="telephones" />
           <Button

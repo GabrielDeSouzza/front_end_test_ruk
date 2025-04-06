@@ -9,6 +9,7 @@ export interface InputFormProps extends ControlProps {
   tittle: string;
   secureTextEntry?: boolean;
   styles?: string;
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
 }
 
 export default function InputForm({
@@ -18,6 +19,7 @@ export default function InputForm({
   tittle,
   secureTextEntry,
   styles,
+  autoCapitalize,
 }: InputFormProps) {
   return (
     <Controller
@@ -28,6 +30,7 @@ export default function InputForm({
           <View className={styles ?? ' border-solid w-11/12 p-1'}>
             <Text className="p-1">{tittle}</Text>
             <TextInput
+              autoCapitalize={autoCapitalize}
               secureTextEntry={secureTextEntry}
               className={`pt-6 pb-2 px-3 rounded bg-gray-100 border ${
                 error ? 'border-red-500' : 'border-transparent'

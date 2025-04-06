@@ -15,7 +15,6 @@ export default function Home() {
     };
     fetchProfile();
   }, [getProfile]);
-  console.log(userData);
   return (
     <View className="flex-1 justify-center items-center  bg-slate-100">
       {!userData ? (

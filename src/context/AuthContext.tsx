@@ -85,6 +85,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return response.status;
     } catch (error) {
       console.log('error', error);
+      return 400;
     }
   };
 
