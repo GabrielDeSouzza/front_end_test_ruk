@@ -5,9 +5,9 @@ import { useAuth } from '@/src/context/AuthContext';
 import { signUpSchema, signUpSchemaType } from './schema';
 import { Button, View } from 'react-native';
 import TelephonesInputs from '../../baseComponents/TelephonesInputs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ToastMessage from '../../baseComponents/ModalMessage';
-import { useNavigation } from '@react-navigation/native';
+import { router } from 'expo-router';
 
 export function SignUpForm() {
   const methods = useForm<signUpSchemaType>({
@@ -25,10 +25,11 @@ export function SignUpForm() {
     SetStatusCode(0);
     SetStatusCode(await signUp(data));
   };
-  const navigate = useNavigation();
-  if (statusCode === 201) {
-    navigate.goBack();
-  }
+  useEffect(() => {
+    if (statusCode === 201) {
+      router.navigate('/Index');
+    }
+  });
 
   return (
     <View className="w-full justify-center items-center h-4/5">

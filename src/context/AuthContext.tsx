@@ -4,6 +4,21 @@ import { Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loginFormSchemaType } from '../components/forms/LoginForm/schema';
 import { signUpSchemaType } from '../components/forms/SignUpForm/schema';
+import { router } from 'expo-router';
+
+export type UserData = {
+  created_at: Date;
+  id: string;
+  name: string;
+  modified_at: Date;
+  email: string;
+  telephones: [
+    {
+      area_code: number;
+      number: number;
+    },
+  ];
+};
 
 const AuthContext = createContext({});
 
@@ -21,7 +36,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
     loadToken();
   }, []);
-
   const signUp = async (dataUser: signUpSchemaType) => {
     const data = {
       name: dataUser.name,
@@ -34,49 +48,70 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         };
       }),
     };
-    const response = await fetch('http://localhost:3000/auth/singUp', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-
-      body: JSON.stringify(data),
-    });
-    console.log(await response.status);
-    return response.status;
-  };
-  const signIn = async (loginData: loginFormSchemaType) => {
-    try {
-      console.log(process.env);
-      const response = await fetch('http://localhost:3000/auth/Sign', {
+    const response = await fetch(
+      `${process.env.EXPO_PUBLIC_API_URL}/auth/singUp`,
+      {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(loginData),
-      });
+
+        body: JSON.stringify(data),
+      },
+    );
+    return response.status;
+  };
+  const signIn = async (loginData: loginFormSchemaType) => {
+    try {
+      const response = await fetch(
+        `${process.env.EXPO_PUBLIC_API_URL}/auth/Sign`,
+        {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(loginData),
+        },
+      );
 
       const result = await response.json();
-
       if (response.ok && result.token) {
         await AsyncStorage.setItem('token', result.token);
         setSession(true);
-      } else {
-        throw new Error(result.message || 'Erro no login');
+        return response.status;
       }
+      return response.status;
     } catch (error) {
-      console.log(error);
+      console.log('error', error);
     }
   };
 
   const signOut = async () => {
     await AsyncStorage.removeItem('token');
     setSession(false);
+    router.navigate('/');
   };
 
-  const contextData = { session, signIn, signOut, signUp };
+  const getProfile = async () => {
+    const token = await AsyncStorage.getItem('token');
+    if (!token) return undefined;
+    const response = await fetch(
+      `${process.env.EXPO_PUBLIC_API_URL}/auth/profile`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    const data: UserData = await response.json();
+    return data;
+  };
+
+  const contextData = { session, signIn, signOut, signUp, getProfile };
 
   return (
     <AuthContext.Provider value={contextData}>
@@ -88,9 +123,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 export const useAuth = () => {
   return useContext(AuthContext) as {
     session: boolean;
-    user: any;
     signUp: ({ email, name, telephones }: signUpSchemaType) => Promise<number>;
-    signIn: ({ email, password }: loginFormSchemaType) => Promise<void>;
+    signIn: ({ email, password }: loginFormSchemaType) => Promise<number>;
     signOut: () => Promise<void>;
+    getProfile: () => Promise<UserData | undefined>;
   };
 };

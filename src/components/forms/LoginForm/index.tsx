@@ -4,16 +4,35 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import InputForm from '../../baseComponents/InputForm';
 import { Button, Text, View } from 'react-native';
 import { useAuth } from '@/src/context/AuthContext';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
+import { useEffect, useState } from 'react';
+import ToastMessage from '../../baseComponents/ModalMessage';
+import LoadingModal from '../../baseComponents/LoadingModal';
 
 export function LoginForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const methods = useForm<loginFormSchemaType>({
     resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
+  const [statusCode, setStatusCode] = useState<number | undefined>(undefined);
   const { signIn } = useAuth();
   const handlerSubmit = async (data: loginFormSchemaType) => {
-    await signIn(data);
+    setIsLoading(true);
+    setStatusCode(0);
+    const resultCode = await signIn(data);
+    setStatusCode(resultCode);
+    setIsLoading(false);
   };
+  useEffect(() => {
+    if (statusCode === 200 || statusCode === 201) {
+      router.navigate('/home');
+    }
+  }, [statusCode]);
+  console.log(statusCode);
   return (
     <View className="w-full  justify-center items-center h-4/5">
       <FormProvider {...methods}>
@@ -40,11 +59,17 @@ export function LoginForm() {
               href={'/signUp'}
               className="flex items-center bg-slate-400 bs"
             >
-              CADASTRAR-SE
+              <Text>CADASTRAR-SE</Text>
             </Link>
           </View>
         </View>
       </FormProvider>
+      {statusCode! >= 400 && (
+        <ToastMessage isError message="ERRO AO REALIZAR LOGIN" />
+      )}
+      {isLoading && (
+        <LoadingModal visible={isLoading} message="Logando"></LoadingModal>
+      )}
     </View>
   );
 }

@@ -1,16 +1,11 @@
 import { LoginForm } from '@/src/components/forms/LoginForm';
-import { Button, View } from 'react-native';
-import { useAuth } from '../context/AuthContext';
+import { View } from 'react-native';
+import 'react-native-get-random-values';
 
 export default function SignIn() {
-  const { session, signOut } = useAuth();
   return (
     <View className="w-screen h-screen">
-      {session ? (
-        <Button title="sair" onPress={signOut} />
-      ) : (
-        <LoginForm></LoginForm>
-      )}
+      <LoginForm></LoginForm>
     </View>
   );
 }

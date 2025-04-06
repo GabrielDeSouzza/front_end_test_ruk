@@ -26,7 +26,7 @@ export default function ToastMessage({ message, isError }: ToastMessageProps) {
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [fadeAnim]);
 
   if (!visible) return null;
 
@@ -45,13 +45,7 @@ export default function ToastMessage({ message, isError }: ToastMessageProps) {
             isError ? 'bg-red-500' : 'bg-green-500'
           }`}
         >
-          <Text
-            className={`px-4 py-2 rounded-xl shadow-lg font-bold ${
-              isError ? 'bg-red-500' : 'bg-green-500'
-            }`}
-          >
-            {message}
-          </Text>
+          <Text className="text-white font-bold">{message}</Text>
         </Animated.View>
       </View>
     </Modal>
