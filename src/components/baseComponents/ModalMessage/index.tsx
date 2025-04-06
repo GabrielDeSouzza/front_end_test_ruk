@@ -41,11 +41,14 @@ export default function ToastMessage({ message, isError }: ToastMessageProps) {
             opacity: fadeAnim,
             elevation: 10,
           }}
-          className={`px-4 py-2 rounded-xl shadow-lg ${
-            isError ? 'bg-red-500' : 'bg-green-500'
-          }`}
         >
-          <Text className="text-white font-bold">{message}</Text>
+          <Text
+            className={`font-bold  px-4 py-2 rounded-xl shadow-lg ${
+              isError ? 'bg-red-500' : 'bg-green-500'
+            }`}
+          >
+            {message}
+          </Text>
         </Animated.View>
       </View>
     </Modal>

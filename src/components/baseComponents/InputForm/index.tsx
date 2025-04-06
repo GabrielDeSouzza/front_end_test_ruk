@@ -8,6 +8,7 @@ export interface InputFormProps extends ControlProps {
   placeholder: string;
   tittle: string;
   secureTextEntry?: boolean;
+  styles?: string;
 }
 
 export default function InputForm({
@@ -16,6 +17,7 @@ export default function InputForm({
   placeholder,
   tittle,
   secureTextEntry,
+  styles,
 }: InputFormProps) {
   return (
     <Controller
@@ -23,7 +25,7 @@ export default function InputForm({
       control={control}
       render={({ field: { onChange, value }, fieldState: { error } }) => {
         return (
-          <View className=" border-solid w-11/12 p-1">
+          <View className={styles ?? ' border-solid w-11/12 p-1'}>
             <Text className="p-1">{tittle}</Text>
             <TextInput
               secureTextEntry={secureTextEntry}

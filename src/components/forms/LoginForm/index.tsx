@@ -59,7 +59,7 @@ export function LoginForm() {
               href={'/signUp'}
               className="flex items-center bg-slate-400 bs"
             >
-              <Text>CADASTRAR-SE</Text>
+              <Text className="text-center">CADASTRAR-SE</Text>
             </Link>
           </View>
         </View>
@@ -67,9 +67,8 @@ export function LoginForm() {
       {statusCode! >= 400 && (
         <ToastMessage isError message="ERRO AO REALIZAR LOGIN" />
       )}
-      {isLoading && (
-        <LoadingModal visible={isLoading} message="Logando"></LoadingModal>
-      )}
+
+      <LoadingModal visible={isLoading} message="Logando"></LoadingModal>
     </View>
   );
 }
