@@ -64,7 +64,11 @@ export function LoginForm() {
           </View>
         </View>
       </FormProvider>
-      {statusCode! >= 400 && (
+      {statusCode! >= 404 && (
+        <ToastMessage isError message="CADASTRO NÃO LOCALIZADO" />
+      )}
+
+      {statusCode! >= 400 && statusCode! !== 404 && (
         <ToastMessage isError message="ERRO AO REALIZAR LOGIN" />
       )}
 

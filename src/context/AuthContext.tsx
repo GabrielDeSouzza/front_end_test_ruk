@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }),
     };
     const response = await fetch(
-      `${process.env.EXPO_PUBLIC_API_URL}/auth/singUp`,
+      `${process.env.EXPO_PUBLIC_API_URL}/auth/signUp`,
       {
         method: 'POST',
         headers: {
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signIn = async (loginData: loginFormSchemaType) => {
     try {
       const response = await fetch(
-        `${process.env.EXPO_PUBLIC_API_URL}/auth/Sign`,
+        `${process.env.EXPO_PUBLIC_API_URL}/auth/signIn`,
         {
           method: 'POST',
           headers: {
