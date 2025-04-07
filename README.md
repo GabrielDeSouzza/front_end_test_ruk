@@ -1,5 +1,5 @@
 # 📱 Desafio Frontend - App de Autenticação com React Native
-Este projeto é o frontend mobile de um sistema de autenticação que utiliza JWT, desenvolvido com React Native + Expo, TypeScript e TailwindCSS. A aplicação permite que usuários realizem login e visualizem seus dados em um cartão de identificação.
+Este projeto é o frontend mobile de um sistema de autenticação que utiliza JWT, desenvolvido com React Native + Expo, TypeScript e TailwindCSS. A aplicação permite que usuários realizem login, se cadastrem e visualizem seus dados em um cartão de identificação.
 
 ## 🔧 Tecnologias Utilizadas
 React Native
@@ -21,7 +21,7 @@ Zod
 ## 📦 Instalação
 Clone o repositório:
 
-git clone [https://github.com/seu-usuario/nome-do-repo.git](https://github.com/GabrielDeSouzza/front_end_test_ruk.git)
+git clone [https://github.com/GabrielDeSouzza/front_end_test_ruk.git](https://github.com/GabrielDeSouzza/front_end_test_ruk.git)
 
 cd front_end_test_ruk
 Instale as dependências:
@@ -38,6 +38,8 @@ npx expo start
 Autenticação via e-mail e senha.
 
 Validações de dos dados com React Hook Form e Zod
+
+Criação de usuário
 
 Exibição de dados do usuário autenticado com base no token JWT.
 
