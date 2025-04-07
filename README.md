@@ -12,6 +12,8 @@ TailwindCSS (via NativeWind)
 
 React Navigation
 
+AsyncStorage
+
 JWT (integração com backend)
 
 React Hook Form
@@ -21,7 +23,7 @@ Zod
 ## 📦 Instalação
 Clone o repositório:
 
-git clone [https://github.com/GabrielDeSouzza/front_end_test_ruk.git](https://github.com/GabrielDeSouzza/front_end_test_ruk.git)
+git clone [https://github.com/seu-usuario/nome-do-repo.git](https://github.com/GabrielDeSouzza/front_end_test_ruk.git)
 
 cd front_end_test_ruk
 Instale as dependências:
@@ -30,7 +32,8 @@ npm install
 Inicie o projeto com Expo:
 ```
 Inicie a Aplicação
-Obs: Necessario confiurar o android Studio ou usar um celular IOS ou ANDROID
+
+Obs: Necessario configurar o android Studio ou usar um celular IOS ou ANDROID para executar o aplicativo
 ```bash
 npx expo start
 ```
@@ -38,8 +41,6 @@ npx expo start
 Autenticação via e-mail e senha.
 
 Validações de dos dados com React Hook Form e Zod
-
-Criação de usuário
 
 Exibição de dados do usuário autenticado com base no token JWT.
 
@@ -58,6 +59,10 @@ Armazena o token em async storage
 Requisição com token no header
 
 Exibe: nome, e-mail, telefones, data de criação e modificação
+
+### 📝 Tela de Criação de Usuário
+Permite o registro de um novo usuário com os seguintes campos: 
+nome, email, senha e telefones
 
 ### 📝 Tela de Criação de Usuário
 Permite o registro de um novo usuário com os seguintes campos: 
